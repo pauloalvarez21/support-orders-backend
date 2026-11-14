@@ -1,4 +1,4 @@
-package com.gae.support_orders;
+package com.gae.supportorders;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

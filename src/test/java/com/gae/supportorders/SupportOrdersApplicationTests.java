@@ -1,4 +1,4 @@
-package com.gae.support_orders;
+package com.gae.supportorders;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

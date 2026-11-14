@@ -1,0 +1,69 @@
+@baseUrl = http://localhost:8080/api/support-orders
+@orderId = 1
+
+### 1. Crear una orden de soporte exitosa (201 Created)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "externalReference": "MOB-1001",
+  "customerId": "CUST-001",
+  "category": "PAYMENT",
+  "description": "El pago aparece como pendiente después de varios minutos en la app.",
+  "channel": "MOBILE_APP",
+  "priority": "MEDIUM"
+}
+
+### 2. Crear una orden con descripción inválida (400 Bad Request - menos de 10 caracteres)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "externalReference": "MOB-1002",
+  "customerId": "CUST-002",
+  "category": "TECHNICAL",
+  "description": "Corto",
+  "channel": "WEB",
+  "priority": "HIGH"
+}
+
+### 3. Intentar duplicar una referencia externa activa (409 Conflict)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "externalReference": "MOB-1001",
+  "customerId": "CUST-003",
+  "category": "ACCOUNT",
+  "description": "Otro reporte con la misma referencia externa activa.",
+  "channel": "MOBILE_APP",
+  "priority": "LOW"
+}
+
+### 4. Listar todas las órdenes (200 OK)
+GET {{baseUrl}}
+
+### 5. Listar órdenes filtradas por estado OPEN (200 OK)
+GET {{baseUrl}}?status=OPEN
+
+### 6. Consultar detalle de una orden existente (200 OK)
+GET {{baseUrl}}/{{orderId}}
+
+### 7. Consultar detalle de una orden inexistente (404 Not Found)
+GET {{baseUrl}}/9999
+
+### 8. Cambiar estado de OPEN a IN_PROGRESS (200 OK)
+PATCH {{baseUrl}}/{{orderId}}/status
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS"
+}
+
+### 9. Intentar transición de estado no permitida: de IN_PROGRESS a OPEN (409 Conflict)
+PATCH {{baseUrl}}/{{orderId}}/status
+Content-Type: application/json
+
+{
+  "status": "OPEN"
+}
