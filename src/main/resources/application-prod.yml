@@ -13,7 +13,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none # ⚠️ CRÍTICO: En producción NUNCA usar 'update' o 'create'. Se usa Flyway/Liquibase.
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:

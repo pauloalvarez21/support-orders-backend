@@ -7,5 +7,5 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop # Crea y destruye el esquema en cada suite de tests
-    show-sql: false # No ensuciar la consola de pruebas
+      ddl-auto: create-drop 
+    show-sql: false

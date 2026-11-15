@@ -33,8 +33,8 @@ public class SupportOrderController {
 
     @GetMapping
     public ResponseEntity<List<OrderResponse.OrderSummary>> listOrders(
-            @RequestParam(required = false) Optional<OrderStatus> status) {
-        log.debug("GET /api/support-orders - statusFilter={}", status.orElse(null));
+            @RequestParam(required = false) OrderStatus status) {
+        log.debug("GET /api/support-orders - statusFilter={}", status);
         List<OrderResponse.OrderSummary> orders = service.listOrders(status);
         return ResponseEntity.ok(orders);
     }

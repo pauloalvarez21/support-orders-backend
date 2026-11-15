@@ -52,8 +52,8 @@ public class SupportOrderService {
     }
 
     @Transactional(readOnly = true)
-    public List<OrderResponse.OrderSummary> listOrders(Optional<OrderStatus> statusFilter) {
-        List<SupportOrder> orders = repository.findByStatus(statusFilter);
+    public List<OrderResponse.OrderSummary> listOrders(OrderStatus statusFilter) {
+        List<SupportOrder> orders = repository.findAllByOptionalStatus(statusFilter);
         
         return orders.stream()
                 .map(OrderResponse.OrderSummary::fromEntity)
